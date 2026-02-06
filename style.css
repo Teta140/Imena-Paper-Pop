@@ -1,0 +1,67 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* COLOR SYSTEM */
+:root {
+    --navy-1: #0a1628;
+    --navy-med: #1b2f4a;
+    --gold: #d4af37;
+    --gold-soft: rgba(212, 175, 55, 0.35);
+    --text-light: #f5f2e9;
+    --text-muted: rgba(255,255,255,0.55);
+}
+
+/* PAGE BACKGROUND */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(
+        circle at top right,
+        rgba(212,175,55,0.25),
+        #081425 60%
+    );
+    font-family: 'Lato', sans-serif;
+    padding: 20px;
+}
+
+/* MAIN CARD */
+.invitation-card {
+    width: 100%;
+    max-width: 950px;
+    padding: 55px;
+    border-radius: 26px;
+    background: linear-gradient(
+        135deg,
+        var(--navy-2),
+        var(--navy-1) 60%,
+        var(--navy-3)
+    );
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    border: 1px solid var(--gold-soft);
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 18px rgba(212,175,55,0.4);
+}
+
+.subtitle {
+    font-si

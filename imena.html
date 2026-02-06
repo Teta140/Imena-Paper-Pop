@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imena Paper Pop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class ="sparkles" id="sparkles"></div>
+    <div class ="container">
+        <h1>Imena Paper Pop</h1>
+        <form id="eventForm">
+            <label for="title">Event Title:</label>
+            <input type="text" id="title" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" required>
+
+            <label for="agenda">Agenda / Description:</label>
+            <textarea id="agenda" rows="5" required></textarea> 
+
+            <button type="button" onclick="generateInvitation()">Generate Invitation</button>
+
+        </form>
+
+        <div>
+        <div id="inv-logo">IMENA</div>
+        <img src="imena.png" alt="Imena Logo" style="max-width:180px;">
+        </div>
+        
+        <div id="inv details">
+            <p><strong>Date:</strong> <span id ="invDate"></span></p>
+            <p><strong>Time:</strong> <span id="invTime"></span></p>
+            <p><strong>Details:</strong><span id ="invAgenda"></span></p>
+        </div>
+        
+
+        <p style="text-align:center; font-style: italic; margin-top: 40px; font-size: 1.3em;">
+            You are cordially invited by the Imena Family.
+        </p>
+        <button id="downloadbtn" type="button" onclick="downloadPDF()">Download as PDF</button>
+
+    </div>
+    <script>
+    function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.width = sparkle.style.height = Math.random() * 4 + 2 + 'px';
+    sparkle.style.left = Math.random() * 100 + 'vw';
+    sparkle.style.top = Math.random() * 100 + 'vh';
+    sparkle.style.animationDelay = Math.random() * 5 + 's';
+    document.getElementById('sparkles').appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 6000);
+}
+function generateInvitation() {
+    const title = document.getElementById('title').value.trim();
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const agenda = document.getElementById('agenda').value.trim();
+
+    if (!title || !date || !time || !agenda) {
+        alert('Please complete all fields.');
+        return;
+    }
+
+    document.getElementById('inv-title').innerText = title;
+    document.getElementById('invDate').innerText = date;
+    document.getElementById('invTime').innerText = time;
+    document.getElementById('invAgenda').innerText = agenda;
+
+    document.getElementById('invitation').style.display = 'block';
+    document.getElementById('downloadBtn').style.display = 'block'
+
+setInterval(createSparkle, 800);
+}
+function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFillColor(10, 20, 41); // navy
+    doc.rect(0, 0, 210, 297, 'F');
+
+    doc.setTextColor(212, 175, 55); // gold
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(40);
+    doc.text('IMENA', 105, 50, { align: 'center' });
+
+    doc.setFontSize(32);
+    doc.text(document.getElementById('inv-title').innerText, 105, 90, { align: 'center' });
+
+    doc.setFontSize(18);
+    doc.text(`Date: ${document.getElementById('invDate').innerText}`, 30, 130);
+    doc.text(`Time: ${document.getElementById('invTime').innerText}`, 30, 150);
+    doc.text('Details:', 30, 170);
+    const details = document.getElementById('invAgenda').innerText;
+    doc.text(details, 30, 190, { maxWidth: 150 });
+
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'italic');
+    doc.text('You are cordially invited by the Imena Family', 105, 240, { align: 'center' });
+
+    doc.save('Imena_Lux_Invitation.pdf');
+}
+</script>
+</body>
+</html>

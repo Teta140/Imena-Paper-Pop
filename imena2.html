@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imena Paper Pop - Event Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0a1628;
+            --navy-medium: #1a2942;
+            --gold: #d4af37;
+            --gold-light: #f4e4b0;
+            --cream: #faf8f3;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2942 50%, #0f1f35 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .invitation-card {
+            background: linear-gradient(to bottom, rgba(26, 41, 66, 0.95), rgba(10, 22, 40, 0.98));
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            animation: cardEntrance 0.8s ease-out;
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .invitation-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--gold), transparent, transparent, var(--gold));
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .form-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 35px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--cream);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="time"]:focus,
+        textarea:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin: 35px 0;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .logo-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 0 3px var(--gold);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+
+        .details-section {
+            margin: 35px 0;
+            padding: 30px;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-item label {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .detail-item .value {
+            color: var(--cream);
+            font-size: 1rem;
+            line-height: 1.6;
+            padding-left: 10px;
+        }
+
+        .invitation-message {
+            text-align: center;
+            margin: 40px 0 35px;
+            animation: fadeIn 0.8s ease-out 1s both;
+        }
+
+        .invitation-message p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-style: italic;
+            line-height: 1.8;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 1.2s both;
+        }
+
+        button {
+            font-family: 'Lato', sans-serif;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #c9a532 100%);
+            color: var(--navy-dark);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .decorative-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 30px 0;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .invitation-card {
+                padding: 30px 25px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-section {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.7) sepia(1) saturate(5) hue-rotate(15deg);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="invitation-card">
+            <div class="header">
+                <h1>Imena Paper Pop</h1>
+                <div class="subtitle">Event Invitation</div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="eventTitle">Event Title</label>
+                    <input type="text" id="eventTitle" placeholder="Enter event name">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDate">Date</label>
+                    <input type="date" id="eventDate">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventTime">Time</label>
+                    <input type="time" id="eventTime">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="eventDescription">Agenda / Description</label>
+                    <textarea id="eventDescription" placeholder="Enter event details, agenda, or description"></textarea>
+                </div>
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="logo-section">
+                <div class="logo-label">IMENA</div>
+                <div class="logo-container">
+                    <img src="imena.png" alt="IMENA Logo">
+                </div>
+            </div>
+
+            <div class="decorative-line"></div>
+
+            <div class="details-section">
+                <div class="detail-item">
+                    <label>Date:</label>
+                    <div class="value" id="displayDate"></div>
+                </div>
+
+                <div class="detail-item">
+                    <label>Time:</label>
+                    <div class="value" id="displayTime"></div>
+                </div>
+
+                <div class="detail-item">
+                    <label>Details:</label>
+                    <div class="value" id="displayDetails"></div>
+                </div>
+            </div>
+
+            <div class="invitation-message">
+                <p>You are cordially invited by the Imena Family.</p>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" id="generateBtn">
+                    <span>Generate Invitation</span>
+                </button>
+                <button class="btn-secondary" id="downloadBtn">
+                    <span>Download as PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-update display fields as user types
+        const eventTitle = document.getElementById('eventTitle');
+        const eventDate = document.getElementById('eventDate');
+        const eventTime = document.getElementById('eventTime');
+        const eventDescription = document.getElementById('eventDescription');
+
+        const displayDate = document.getElementById('displayDate');
+        const displayTime = document.getElementById('displayTime');
+        const displayDetails = document.getElementById('displayDetails');
+
+        eventDate.addEventListener('change', function() {
+            if (this.value) {
+                const date = new Date(this.value);
+                displayDate.textContent = date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            } else {
+                displayDate.textContent = 'Not set';
+            }
+        });
+
+        eventTime.addEventListener('change', function() {
+            if (this.value) {
+                displayTime.textContent = this.value;
+            } else {
+                displayTime.textContent = 'Not set';
+            }
+        });
+
+        eventDescription.addEventListener('input', function() {
+            if (this.value.trim()) {
+                displayDetails.textContent = this.value;
+            } else {
+                displayDetails.textContent = 'No details provided';
+            }
+        });
+
+        // Generate button functionality
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const title = eventTitle.value;
+            const date = eventDate.value;
+            const time = eventTime.value;
+            const description = eventDescription.value;
+
+            if (!title || !date || !time) {
+                alert('Please fill in all required fields: Event Title, Date, and Time');
+                return;
+            }
+
+            // Create visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+
+            alert('Invitation generated successfully! ✨');
+        });
+
+        // Download PDF button functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Placeholder for PDF download functionality
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            alert('PDF download feature coming soon! 📄');
+        });
+    </script>
+</body>
+</html>
